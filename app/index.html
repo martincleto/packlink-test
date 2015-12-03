@@ -1,0 +1,270 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>Packlink test - Santiago Martín-Cleto</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+    <div class="page-container">
+
+      <header class="page-header">
+
+        <div class="page-header__inner-wrapper">
+
+          <a href="#" class="page-header__logo">
+            <span>Packlink</span>
+          </a>
+
+          <ul class="page-header__info">
+              <li class="page-header__info-items">x2</li>
+              <li class="page-header__info-from" itemscope itemtype="http://schema.org/PostalAddress">
+                <span itemprop="addressCountry">Spain</span>
+                <span itemprop="postalCode">03340</span>
+              </li>
+              <li class="page-header__info-to" itemscope itemtype="http://schema.org/PostalAddress">
+                <span itemprop="addressCountry">United Kingdom</span>
+                <span itemprop="postalCode">48490</span>
+              </li>
+              <li class="page-header__info-strapline">
+                Please select a service bellow to <strong>get your discount price!</strong>
+              </li>
+          </ul>
+
+          <div class="page-header__navigation-toggle-wrapper">
+            <a href="#" role="button" class="page-header__navigation-toggle" data-label-default="Open" data-label-active="Close"><span>Open</span></a>
+          </div>
+
+        </div>
+
+        <nav class="page-header__navigation">
+          <ul class="page-header__navigation-list">
+            <li><a href="#">Navigation item 1</a></li>
+            <li><a href="#">Navigation item 2</a></li>
+            <li><a href="#">Navigation item 3</a></li>
+            <li><a href="#">Navigation item 4</a></li>
+            <li><a href="#">Navigation item 5</a></li>
+            <li><a href="#">Navigation item 6</a></li>
+            <li><a href="#">Navigation item 7</a></li>
+          </ul>
+        </nav>
+
+      </header>
+
+      <form action="#" method="get" class="dashboard">
+
+        <h1 class="dashboard__title">Select a service</h1>
+
+        <ul class="dashboard__order-by">
+          <li class="dashboard__order-by-dropoff"><a href="#">Dropoff services</a></li>
+          <li class="dashboard__order-by-filter">Order by <a href="#">Best price</a></li>
+        </ul>
+
+        <div class="dashboard__controls" aria-controls="dahsboard__panel-1">
+
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Couriers
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="#">Option 1</a></li>
+              <li><a href="#">Option 2</a></li>
+              <li><a href="#">Option 3</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Pick up
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="#">Option 1</a></li>
+              <li><a href="#">Option 2</a></li>
+              <li><a href="#">Option 3</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Delivery
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="#">Option 1</a></li>
+              <li><a href="#">Option 2</a></li>
+              <li><a href="#">Option 3</a></li>
+            </ul>
+          </div>
+
+          <div class="dashboard__controls-filters">
+             <div class="input-group">
+                <input type="checkbox" id="filter-1" checked aria-label="Only granted services">
+                <label for="filter-1">Only granted services</label>
+            </div>
+            <div class="input-group">
+                <input type="checkbox" id="filter-2" aria-label="Only granted services">
+                <label for="filter-2">Only Cash on delivered services</label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="dahsboard__panel" id="dahsboard__panel-1" aria-live="polite">
+
+          <section class="dashboard__item">
+            <div class="dashboard__item-inner-wrapper">
+              <header class="dashboard__item-courier">
+                <img src="images/ups.png" alt="UPS logo" class="dashboard__item-courier-image">
+                <h2 class="dashboard__item-courier-name">UPS Standard</h2>
+              </header>
+              <div class="dashboard__item-body">
+                <div class="dashboard__item-from-info" data-day="07">
+                  Pick up at homes/offices
+                  <span>During morning from 8:00 to 14:00</span>
+                </div>
+                <div class="dashboard__item-estimated-time">
+                  48h <span>estimated</span>
+                </div>
+                <div class="dashboard__item-to-info" data-day="08">
+                  Pick up at homes/offices
+                  <span>During morning from 8:00 to 14:00</span>
+                </div>
+                <div class="dashboard__item-cta">
+                  3,50 € <span>+ <abbr title="Value added tax">VAT</abbr></span>
+                  <button class="cta">Select this</button>
+                </div>
+              </div>
+            </div>
+            <footer class="dashboard__item-more-info">
+              <ul>
+                <li>Printer required</li>
+                <li>100 € insurance for free</li>
+                <li>Tracking online available</li>
+              </ul>
+              <a href="#" class="dashboard__item-read-more">Full details</a>
+            </footer>
+          </section>
+
+          <section class="dashboard__item">
+            <div class="dashboard__item-inner-wrapper">
+              <header class="dashboard__item-courier">
+                <img src="images/ups.png" alt="UPS logo" class="dashboard__item-courier-image">
+                <h2 class="dashboard__item-courier-name">UPS Standard</h2>
+              </header>
+              <div class="dashboard__item-body">
+                <div class="dashboard__item-from-info" data-day="07">
+                  Pick up at homes/offices
+                  <span>During morning from 8:00 to 14:00</span>
+                </div>
+                <div class="dashboard__item-estimated-time">
+                  48h <span>estimated</span>
+                </div>
+                <div class="dashboard__item-to-info" data-day="08">
+                  Pick up at homes/offices
+                  <span>During morning from 8:00 to 14:00</span>
+                </div>
+                <div class="dashboard__item-cta">
+                  3,50 € <span>+ <abbr title="Value added tax">VAT</abbr></span>
+                  <button class="cta">Select this</button>
+                </div>
+              </div>
+            </div>
+            <footer class="dashboard__item-more-info">
+              <ul>
+                <li>Printer required</li>
+                <li>100 € insurance for free</li>
+                <li>Tracking online available</li>
+              </ul>
+              <a href="#" class="dashboard__item-read-more">Full details</a>
+            </footer>
+          </section>
+
+          <section class="dashboard__item">
+            <div class="dashboard__item-inner-wrapper">
+              <header class="dashboard__item-courier">
+                <img src="images/ups.png" alt="UPS logo" class="dashboard__item-courier-image">
+                <h2 class="dashboard__item-courier-name">UPS Standard</h2>
+              </header>
+              <div class="dashboard__item-body">
+                <div class="dashboard__item-from-info" data-day="07">
+                  Pick up at homes/offices
+                  <span>During morning from 8:00 to 14:00</span>
+                </div>
+                <div class="dashboard__item-estimated-time">
+                  48h <span>estimated</span>
+                </div>
+                <div class="dashboard__item-to-info" data-day="08">
+                  Pick up at homes/offices
+                  <span>During morning from 8:00 to 14:00</span>
+                </div>
+                <div class="dashboard__item-cta">
+                  3,50 € <span>+ <abbr title="Value added tax">VAT</abbr></span>
+                  <button class="cta">Select this</button>
+                </div>
+              </div>
+            </div>
+            <footer class="dashboard__item-more-info">
+              <ul>
+                <li>Printer required</li>
+                <li>100 € insurance for free</li>
+                <li>Tracking online available</li>
+              </ul>
+              <a href="#" class="dashboard__item-read-more">Full details</a>
+            </footer>
+          </section>
+
+        </div>
+
+      </form>
+
+      <footer class="page-footer">
+        <div class="page-footer__inner-wrapper">
+          <p class="page-footer__copy">&copy; 2016 Paclink all righ reserved. Have a look at our <a href="#">terms and conditions</a>, our <a href="#">privacy policy</a> and <a href="#">cookie policy</a></p>
+        <div class="page-footer__payment-security">
+          Secure payment guaranteed
+          <img src="images/credit-cards-sprite.gif" alt="Image alt">
+        </div>
+        </div>
+      </footer>
+
+    </div>
+
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+
+    <!-- build:js(.) scripts/plugins.js -->
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>

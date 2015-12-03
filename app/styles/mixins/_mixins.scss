@@ -1,0 +1,240 @@
+///
+/// Simple mixin to set elements box-sizing across all browsers.
+///
+/// @group element layout
+///
+/// @output Default version of box-sizing property, browser prefix added by grunt-autoprefixer.
+///
+/// @example scss
+/// include box-sizing();
+///
+@mixin box-sizing() {
+    box-sizing: border-box;
+}
+
+
+///
+/// A small mixin for easy use of rem with px as fallback.
+/// Modern browsers will see rem values, IE8 will see px values.
+///
+/// @author Eric Meyer & Christian Reinl & Matt Hobbs
+/// @group unit conversion
+///
+/// @param  {String} $property CSS property that needs rem value with px fallback.
+/// @param  {String} $values Value, or list of values for conversion.
+/// @output {String} Return property: value for both rems and pixels.
+///
+/// @example scss
+/// include x-rem(font-size, 14px);
+/// @example scss
+/// include x-rem(margin, 0 12px 2 1.2);
+/// @example scss
+/// include x-rem(padding, 1.5 24px);
+///
+/// @link https://gist.github.com/webgefrickel/4530526
+///
+@mixin x-rem($property, $values) {
+    // Create a couple of empty lists as output buffers.
+    $base-font-size: $rem-base; // should be consistent with your html/body font-size
+    $px-values: ();
+    $rem-values: ();
+
+    // Loop through the $values list
+    @each $value in $values {
+        // For each property value, if it's in rem or px, derive both rem and
+        // px values for it and add those to the end of the appropriate buffer.
+        // Ensure all pixel values are rounded to the nearest pixel.
+        @if $value == 0 or $value == 0px {
+            // 0 -- use it without a unit
+            $px-values: join($px-values, 0);
+            $rem-values: join($rem-values, 0);
+        } @else if type-of($value) == number and not unitless($value) and (unit($value) == px) {
+            // px value given - calculate rem value from base-font-size
+            $new-rem-value: _strip-unit($value) / $base-font-size;
+            $new-px-value: round($value);
+            $px-values: join($px-values, $new-px-value);
+            $rem-values: join($rem-values, #{$new-rem-value}rem);
+        } @else if type-of($value) == number and not unitless($value) and (unit($value) == '%') {
+            // % value given - don't add px or rem
+            $px-values: join($px-values, #{$value});
+            $rem-values: join($rem-values, #{$value});
+        } @else if $value == auto {
+            // auto - don't add px or rem
+            $px-values: join($px-values, auto);
+            $rem-values: join($rem-values, auto);
+        } @else {
+            // unitless value - use those directly as rem and calculate the px-fallback
+            $pixel-value: round($value * $base-font-size) * 1px;
+            $px-values: join($px-values, $pixel-value);
+            $rem-values: join($rem-values, #{$value}rem);
+        }
+    }
+
+    // output the converted rules
+    @if global-variable-exists(px-fallback) and $px-fallback == true {
+        #{$property}: $px-values;
+    } @else {
+        #{$property}: $rem-values;
+    }
+}
+
+///
+/// Hide an element from both screenreaders and browsers.
+///
+/// @author Paul Miller
+/// @group element accessibility
+///
+/// @example scss
+/// include hidden();
+///
+/// @link https://github.com/paulmillr/h5bp-helpers/blob/master/helpers.css
+/// @link http://h5bp.com/u
+///
+@mixin hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+///
+/// Hide only visually, but have it available for screenreaders.
+///
+/// @author Paul Miller
+/// @group element accessibility
+///
+/// @example scss
+/// include visually-hidden();
+///
+/// @link https://github.com/paulmillr/h5bp-helpers/blob/master/helpers.css
+/// @link http://h5bp.com/v
+///
+@mixin visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+
+    // Extends the .visuallyhidden class to allow the element to be focusable
+    // when navigated to via the keyboard: h5bp.com/p
+    &.focusable:active,
+    &.focusable:focus {
+        clip: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        position: static;
+        width: auto;
+    }
+}
+
+///
+/// Hide visually and from screenreaders, but maintain layout.
+///
+/// @author Paul Miller
+/// @group element accessibility
+///
+/// @example scss
+/// include invisible();
+///
+/// @link https://github.com/paulmillr/h5bp-helpers/blob/master/helpers.css
+///
+@mixin invisible {
+    visibility: hidden;
+}
+
+///
+/// Easy way to vendor prefix a property.
+/// @group element css
+/// @deprecated Build now relies on grunt-autoprefixer, manual addition is no longer needed.
+///
+/// @param  {String} $name Name of the CSS property.
+/// @param  {String} $value Value of the CSS property.
+///
+/// @example scss
+/// include vendor-prefix(transform, translateY(-50%));
+///
+@mixin vendor-prefix($name, $value) {
+    @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
+        #{$vendor}#{$name}: #{$value};
+    }
+}
+
+///
+/// Verticle align any element (works down to IE9).
+///
+/// @group element layout
+/// @example scss
+/// include vertical-align();
+///
+@mixin vertical-align {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+///
+/// Remove styling from a list element.
+///
+/// @group element layout
+/// @example scss
+/// include no-style-list();
+///
+@mixin no-style-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+///
+/// Simple way to add a hover and active pseudo class to an element.
+/// @group element css
+///
+/// @example scss
+/// a {
+///  include hover-active {
+///      background: red;
+///      text-decoration: none;
+///  }
+/// }
+/// // Results in
+/// a:hover,
+/// a:active {
+///      background: red;
+///      text-decoration: none;
+/// }
+///
+@mixin hover-active() {
+    &:hover,
+    &:active {
+        @content;
+    }
+}
+
+/// Helper to clear inner floats
+/// @author Nicolas Gallagher
+/// @link http://nicolasgallagher.com/micro-clearfix-hack/ Micro Clearfix
+@mixin clearfix {
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+// Packlink button
+
+@mixin packlink-button( $bg-color: $orange, $fg-color: $white) {
+  @include x-rem(padding, 8px 18px);
+
+  background-color: $bg-color;
+  color: $white;
+  border: 0;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 400;
+
+}
+

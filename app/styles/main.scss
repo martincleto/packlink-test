@@ -1,0 +1,684 @@
+$icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+
+// bower:scss
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/grid";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/forms";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
+// endbower
+
+@import "variables/colors";
+@import "variables/layout";
+@import "functions/functions";
+@import "mixins/mixins";
+
+$page-header: ".page-header";
+$dashboard: ".dashboard";
+$page-footer: ".page-footer";
+
+// Globals
+
+*,
+*:before,
+*:after {
+    @include box-sizing();
+}
+
+body {
+  font-size: $rem-base;
+  font-family: serif;
+  line-height: 1.25;
+  color: $graphite;
+  background: $white;
+}
+
+label {
+  font-weight: 100;
+}
+
+a {
+  color: $dark-blue;
+  text-decoration: none;
+
+  @include hover-active() {
+    text-decoration: underline;
+  }
+}
+
+// Header
+
+#{$page-header} {
+  @include x-rem(margin, 0 0 30px);
+
+  background-color: $dark-blue;
+  color: $white;
+  padding: 0;
+
+  &__inner-wrapper {
+    @include x-rem(height, 50px);
+    @include x-rem(padding, 10px);
+
+    position: relative;
+  }
+
+  &__logo {
+    @include x-rem(width, 90px);
+    @include x-rem(height, 30px);
+
+    display: block;
+    background: url(#{$img-asset-path}packlink.png) no-repeat;
+    background-size: contain;
+
+    span {
+      @include visually-hidden();
+    }
+  }
+
+  &__info {
+    display: none;
+  }
+
+  &__navigation-toggle-wrapper {
+    @include x-rem(width, 50px);
+    @include x-rem(height, 50px);
+    @include x-rem(padding, 10px);
+
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: $darkest-blue;
+  }
+
+  &__navigation-toggle {
+
+    @include packlink-button();
+
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+
+    &:before {
+      @include x-rem(width, 24px);
+      @include x-rem(height, 24px);
+      @include x-rem(top, 2px);
+      @include x-rem(left, 2px);
+
+      content: url(#{$img-asset-path}expand_white.png);
+      position: absolute;
+    }
+
+    span {
+      @include visually-hidden();
+    }
+  }
+
+  &__navigation {
+    @include x-rem(top, 50px);
+    @include x-rem(left, 0);
+
+    position: absolute;
+    width: 100%;
+    background-color: $dark-blue;
+    color: $white;
+    z-index: $z-index-10;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease-in;
+  }
+
+  &__navigation-list {
+    @include no-style-list();
+
+    li {
+      @include x-rem(padding, 10px $vertical-padding);
+
+      border-top: solid 1px $white;
+    }
+
+    a {
+      color: inherit;
+    }
+  }
+
+  &--expanded {
+
+    #{$page-header}__navigation {
+      @include x-rem(max-height, 2000px);
+    }
+  }
+
+}
+
+// Dashboard
+
+#{$dashboard} {
+  @include x-rem(padding, 0 $vertical-padding);
+
+  &__title {
+    @include x-rem(margin, 0 0 30px);
+
+    color: $dark-blue;
+  }
+
+  &__order-by {
+    @include no-style-list();
+    @include x-rem(margin-bottom, 20px);
+
+    font-size: 0;
+    color: $medium-grey;
+
+    li {
+      @include x-rem(font-size, 14px);
+
+      display: inline-block;
+    }
+
+    &-dropoff {
+      @include x-rem(padding-right, 8px);
+      @include x-rem(margin-right, 8px);
+
+      border-right: solid 1px $medium-grey;
+
+      &:before {
+        @include x-rem(width, 16px);
+        @include x-rem(height, 23px);
+        @include x-rem(margin-right, 5px);
+
+        content: "";
+        background: url(#{$img-asset-path}dropoff.png) no-repeat;
+        background-size: contain;
+        display: inline-block;
+        vertical-align: middle;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &__controls {
+    @include x-rem(padding, 10px);
+    @include x-rem(margin-bottom, 40px);
+
+    background-color: $medium-blue;
+    border-radius: 5px;
+
+    .btn,
+    .dropdown-menu {
+      width: 100%;
+    }
+
+    .dropdown {
+      @include x-rem(margin-bottom, 15px);
+    }
+  }
+
+  &__controls-filters {
+
+      label {
+        vertical-align: middle;
+
+        &:before {
+          @include x-rem(width, 24px);
+          @include x-rem(height, 24px);
+          @include x-rem(margin-right, 10px);
+
+          display: inline-block;
+          content: '';
+          background-color: $white;
+          border-radius: 3px;
+          vertical-align: middle;
+        }
+      }
+
+      input[type=checkbox] {
+        @include visually-hidden();
+
+        &:checked ~ label {
+            &:before {
+              background-image: url(#{$img-asset-path}check.png);
+              background-repeat: none;
+            }
+        }
+
+        // Needs to be repeated as IE8 seems not to render if rule is coupled above
+        .lt-ie9 &.checked ~ label {
+            &:before {
+              background-image: url(#{$img-asset-path}check.png);
+              background-repeat: none;
+            }
+        }
+      }
+  }
+
+  &__item {
+    color: $dark-blue;
+    border: dashed 1px $medium-blue;
+    border-radius: 5px;
+
+    &-courier {
+      @include x-rem(padding, 30px $vertical-padding);
+
+      background-color: $light-blue;
+
+      text-align: center;
+    }
+
+    &-courier-image {
+      max-width: 30%;
+    }
+
+    &-body {
+      @include x-rem(padding, 30px $vertical-padding);
+    }
+
+    &-from-info,
+    &-to-info {
+      @include x-rem(padding-top, 5px);
+
+      &:before {
+        @include x-rem(width, 38px);
+        @include x-rem(height, 40px);
+        @include x-rem(padding-top, 16px);
+        @include x-rem(margin, -5px 10px 0);
+
+        content: attr(data-day);
+        display: block;
+        float: left;
+        background-image: url(#{$img-asset-path}calendar.png);
+        background-size: contain;
+        text-align: center;
+      }
+    }
+
+    &-estimated-time {
+      @include x-rem(font-size, 38px);
+      @include x-rem(padding, 20px 0);
+
+      font-weight: 600;
+      text-align: center;
+
+      &:before,
+      &:after {
+        @include x-rem(margin-bottom, 20px);
+
+        content: "";
+        display: block;
+        width: 1px;
+        height: 40px;
+        border-left: dotted 2px $medium-grey;
+        position: relative;
+        left: 50%;
+      }
+
+      &:after {
+        @include x-rem(margin-top, 30px);
+
+        margin-bottom: 0;
+      }
+    }
+
+    &-from-info,
+    &-to-info,
+    &-estimated-time {
+      span {
+        @include x-rem(font-size, 14px);
+
+        display: block;
+        color: $medium-grey;
+      }
+    }
+
+    &-cta {
+      @include x-rem(padding-top, 30px);
+      @include x-rem(font-size, 48px);
+
+      font-weight: 800;
+      text-align: center;
+
+      span {
+        @include x-rem(font-size, 14px);
+
+        display: block;
+        color: $graphite;
+      }
+
+      .cta {
+        @include packlink-button();
+        @include x-rem(font-size, 18px);
+      }
+    }
+
+    &-more-info {
+      @include x-rem(padding, 10px $vertical-padding);
+
+      background-color: $medium-blue;
+      color: $graphite;
+      text-align: center;
+
+      ul {
+        @include no-style-list();
+        @include x-rem(margin-bottom, 15px);
+      }
+
+      li {
+        @include x-rem(padding, 5px 0);
+
+        text-align: left;
+
+        &:before {
+          @include x-rem(width, 14px);
+          @include x-rem(height, 18px);
+          @include x-rem(margin-right, 8px);
+
+          content: "";
+          background: url(#{$img-asset-path}note.png) no-repeat center center;
+          background-size: contain;
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
+
+// Footer
+
+#{$page-footer} {
+  @include x-rem(margin-top, 30px);
+
+  border-top: solid 3px $medium-blue;
+
+  &__inner-wrapper {
+    @include x-rem(padding, 30px $vertical-padding);
+  }
+
+  &__copy {
+    @include x-rem(font-size, 12px);
+    @include x-rem(margin-bottom, 20px);
+  }
+
+  &__payment-security {
+    text-transform: uppercase;
+
+    img {
+      display: block;
+    }
+  }
+}
+
+// Ovewrite bootstrap styles
+
+.btn {
+
+  font-size: 1rem;
+  text-align: left;
+  border: none;
+
+  &:after {
+    @include x-rem(width, 24px);
+    @include x-rem(height, 24px);
+
+    content: '';
+    background-image: url(#{$img-asset-path}expand_black.png);
+    background-size: contain;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+}
+
+.dropdown-menu {
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+
+  // Header
+
+  #{$page-header} {
+
+    &__inner-wrapper {
+      max-width: $constrained-width;
+      margin: 0 auto;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &__logo {
+      @include x-rem(margin, 10px 35px 0 0);
+
+      float: left;
+    }
+
+    &__info {
+      @include no-style-list();
+
+      display: table;
+      table-layout: fixed;
+      width: 75%;
+
+      li {
+        @include x-rem(height, 45px);
+        @include x-rem(font-size, 14px);
+
+        display: table-cell;
+        vertical-align: middle;
+
+        span {
+          display: block;
+
+
+          &[itemprop=postalCode] {
+            color: $medium-blue;
+            font-weight: 200;
+          }
+        }
+      }
+
+      &-items {
+        @include x-rem(padding-left, 35px);
+
+        border-left: dashed 1px lighten( $dark-blue, 20% );
+
+
+        &:before {
+
+          @include x-rem(width, 35px);
+          @include x-rem(height, 33px);
+          @include x-rem(margin-right, 5px);
+
+          content: "";
+          display: inline-block;
+          background: url(#{$img-asset-path}box.png) no-repeat;
+          background-size: contain;
+          vertical-align: middle;
+        }
+      }
+
+      &-strapline {
+        width: 40%;
+
+        strong {
+          display: block;
+          color: $medium-blue;
+        }
+      }
+    }
+
+    &__navigation {
+
+      @at-root {
+        .csscolumns &-list {
+          @include x-rem(margin, 0 auto 30px);
+          @include x-rem(padding, 0 $vertical-padding);
+
+          max-width: $constrained-width;
+          column-count: 3;
+          column-width: 33.33%;
+
+
+          li {
+            @include x-rem(padding, 15px 0 0);
+
+            border: none;
+
+          }
+        }
+      }
+    }
+  }
+
+  // Dashboard
+  #{$dashboard} {
+    max-width: $constrained-width;
+    margin: 0 auto;
+
+    &__title {
+      float: left;
+    }
+
+    &__order-by {
+      @include x-rem(margin, 25px 45px 0);
+      float: right;
+    }
+
+    &__controls {
+      @include clearfix();
+      @include x-rem(padding, 30px);
+
+      clear: both;
+
+      .dropdown {
+        display: inline-block;
+        width: 18%;
+        margin-right: 2%;
+        margin-bottom: 0;
+      }
+
+      .btn {
+        @include x-rem(height, 54px);
+      }
+
+      &-filters {
+        float: right;
+        width: 38%;
+      }
+
+    }
+
+    &__item {
+      @include x-rem(margin-bottom, 40px);
+
+      &-inner-wrapper {
+        @include x-rem(height, 158px);
+      }
+
+      &-courier {
+        @include x-rem(width, 158px);
+
+        float: left;
+      }
+
+      &-courier-image {
+        @include x-rem(width, 55px);
+
+        max-width: none;
+      }
+
+      &-courier-name {
+        @include x-rem(font-size, 12px);
+      }
+
+      &-body {
+        @include vertical-align();
+        @include x-rem(padding, 0 35px);
+        @include x-rem(margin-left, 158px);
+
+        width: calc(100% - 158px);
+        display: table;
+        table-layout: fixed;
+
+        > div {
+          display: table-cell;
+        }
+      }
+
+      &-estimated-time {
+        position: relative;
+        width: 16%;
+
+        &:before,
+        &:after {
+
+
+          content: "";
+          width: 100%;
+          height: 1px;
+          border-top: dotted 2px $medium-grey;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          z-index: 0
+        }
+
+        &:after {
+          display: none;
+        }
+
+        span {
+          background-color: $white;
+        }
+      }
+
+      &-cta {
+        @include x-rem(font-size, 36px);
+
+        padding-top: 0;
+
+        span {
+          display: inline;
+        }
+      }
+
+      &-more-info {
+        clear: left;
+        width: 100%;
+        text-align: left;
+        position: relative;
+
+        ul {
+          margin-bottom: 0;
+        }
+
+        li {
+          display: inline-block;
+        }
+      }
+
+      &-read-more {
+        @include x-rem(top, 18px);
+        @include x-rem(right, 20px);
+
+        position: absolute;
+      }
+    }
+  }
+
+  // Footer
+  #{$page-footer} {
+    &__inner-wrapper {
+      max-width: $constrained-width;
+      margin: 0 auto;
+    }
+  }
+}
