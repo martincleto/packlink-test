@@ -9,7 +9,6 @@
     this.$navigationToggleButton = $( '.page-header__navigation-toggle' );
 
     this.bindEvents();
-
   }
 
 
@@ -18,10 +17,9 @@
 
     this.$navigationToggleButton.on( 'click', function(){
       self.$pageHeader.toggleClass( 'page-header--expanded' );
-      console.log( 'click' );
     } )
   };
 
   packlinkTest = new PacklinkTest;
 
-} )(jQuery)
+} )(jQuery);
