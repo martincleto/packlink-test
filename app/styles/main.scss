@@ -1,17 +1,12 @@
 $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 
-// bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/variables";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/grid";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/forms";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
-// endbower
 
 @import "variables/colors";
 @import "variables/layout";
@@ -72,6 +67,7 @@ a {
     @include x-rem(height, 30px);
 
     display: block;
+    // TODO: Refactor this to a mixin, better using icon-fonts and data-icon attribute
     background: url(#{$img-asset-path}packlink.png) no-repeat;
     background-size: contain;
 
@@ -192,11 +188,12 @@ a {
         @include x-rem(margin-right, 5px);
 
         content: "";
-        background: url(#{$img-asset-path}dropoff.png) no-repeat;
-        background-size: contain;
         display: inline-block;
         vertical-align: middle;
         opacity: 0.5;
+        // TODO: Refactor this to a mixin, better using icon-fonts and data-icon attribute
+        background: url(#{$img-asset-path}dropoff.png) no-repeat;
+        background-size: contain;
       }
     }
   }
@@ -290,9 +287,10 @@ a {
         content: attr(data-day);
         display: block;
         float: left;
+        text-align: center;
+        // TODO: Refactor this to a mixin, better using icon-fonts and data-icon attribute
         background-image: url(#{$img-asset-path}calendar.png);
         background-size: contain;
-        text-align: center;
       }
     }
 
@@ -377,10 +375,11 @@ a {
           @include x-rem(margin-right, 8px);
 
           content: "";
-          background: url(#{$img-asset-path}note.png) no-repeat center center;
-          background-size: contain;
           display: inline-block;
           vertical-align: middle;
+          // TODO: Refactor this to a mixin, better using icon-fonts and data-icon attribute
+          background: url(#{$img-asset-path}note.png) no-repeat center center;
+          background-size: contain;
         }
       }
     }
@@ -425,12 +424,13 @@ a {
     @include x-rem(height, 24px);
 
     content: '';
-    background-image: url(#{$img-asset-path}expand_black.png);
-    background-size: contain;
     position: absolute;
     top: 50%;
     right: 0;
     transform: translateY(-50%);
+    // TODO: Refactor this to a mixin, better using icon-fonts and data-icon attribute
+    background-image: url(#{$img-asset-path}expand_black.png);
+    background-size: contain;
   }
 }
 
@@ -439,15 +439,19 @@ a {
   margin-top: 0;
 }
 
+// TODO: a media query targeting tablet landscape would be great
+// breakpoint at 768px to match an adapted design
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+/* Responsive: Desktop */
+@media screen and (min-width: 960px) {
 
   // Header
 
   #{$page-header} {
 
     &__inner-wrapper {
+      @include x-rem(height, 90px);
+
       max-width: $constrained-width;
       margin: 0 auto;
       padding-top: 0;
@@ -455,7 +459,7 @@ a {
     }
 
     &__logo {
-      @include x-rem(margin, 10px 35px 0 0);
+      @include x-rem(margin, 32px 35px 0 0);
 
       float: left;
     }
@@ -468,7 +472,7 @@ a {
       width: 75%;
 
       li {
-        @include x-rem(height, 45px);
+        @include x-rem(height, 90px);
         @include x-rem(font-size, 14px);
 
         display: table-cell;
@@ -499,13 +503,17 @@ a {
 
           content: "";
           display: inline-block;
+          vertical-align: middle;
+          // TODO: Refactor this to a mixin, better using icon-fonts and data-icon attribute
           background: url(#{$img-asset-path}box.png) no-repeat;
           background-size: contain;
-          vertical-align: middle;
         }
       }
 
       &-strapline {
+        @include x-rem(padding-left, 35px);
+
+        border-left: dashed 1px lighten( $dark-blue, 20% );
         width: 40%;
 
         strong {
@@ -515,7 +523,22 @@ a {
       }
     }
 
+    &__navigation-toggle-wrapper {
+      @include x-rem(width, 128px);
+      @include x-rem(height, 90px);
+      @include x-rem(padding, 25px 45px);
+    }
+
+    &__navigation-toggle {
+
+      &:before {
+        @include x-rem(top, 20px);
+        @include x-rem(left, 40px);
+      }
+    }
+
     &__navigation {
+      @include x-rem(top, 90px);
 
       @at-root {
         .csscolumns &-list {
@@ -619,20 +642,20 @@ a {
 
         &:before,
         &:after {
-
-
           content: "";
-          width: 100%;
+          width: 35px;
           height: 1px;
           border-top: dotted 2px $medium-grey;
           position: absolute;
-          top: 50%;
+          top: 58%;
           left: 0;
           z-index: 0
         }
 
         &:after {
-          display: none;
+          left: auto;
+          right: 0;
+          top: 36%;
         }
 
         span {
@@ -643,11 +666,9 @@ a {
       &-cta {
         @include x-rem(font-size, 36px);
 
+        width: 15%;
         padding-top: 0;
 
-        span {
-          display: inline;
-        }
       }
 
       &-more-info {
@@ -677,8 +698,22 @@ a {
   // Footer
   #{$page-footer} {
     &__inner-wrapper {
+      @include clearfix();
+
+      position: relative;
       max-width: $constrained-width;
       margin: 0 auto;
+    }
+
+    &__copy {
+      width: 60%;
+    }
+
+    &__payment-security {
+      @include x-rem(top, 18px);
+      @include x-rem(right, 20px);
+
+      position: absolute;
     }
   }
 }
